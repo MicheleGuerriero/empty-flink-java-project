@@ -52,9 +52,9 @@
 			<version>${flink.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.flink</groupId>
-		    <artifactId>flink-streaming-scala_2.11</artifactId>
-		    <version>1.4.0</version>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-scala_2.11</artifactId>
+			<version>1.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -67,11 +67,15 @@
 			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.flink</groupId>
-		  <artifactId>flink-connector-kafka-0.10_2.11</artifactId>
-		  <version>1.4.0</version>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-connector-kafka-0.10_2.11</artifactId>
+			<version>1.4.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
@@ -153,11 +157,12 @@
 										</filter>
 									</filters>
 
-                             		<transformers>
-                             			<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                             			<mainClass>advertisinganalysis.application.AdvertisingAnalysis</mainClass>
-                             			</transformer>
-                            		</transformers>
+									<transformers>
+										<transformer
+											implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+											<mainClass>advertisinganalysis.application.AdvertisingAnalysis</mainClass>
+										</transformer>
+									</transformers>
 								</configuration>
 							</execution>
 						</executions>
@@ -215,7 +220,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -229,7 +234,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

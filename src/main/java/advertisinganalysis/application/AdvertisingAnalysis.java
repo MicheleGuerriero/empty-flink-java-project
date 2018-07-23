@@ -33,7 +33,7 @@ public class AdvertisingAnalysis {
 		MessageStream_kafkaParams.setProperty("bootstrap.servers", ":9092");
 		MessageStream_kafkaParams.setProperty("group.id", "MessageStream_groupId");
 		DataStream<String> rawAdEvents = env.addSource(
-				new FlinkKafkaConsumer010<>("MessageStream", new SimpleStringSchema(), MessageStream_kafkaParams));
+				new FlinkKafkaConsumer010<>("ad-events", new SimpleStringSchema(), MessageStream_kafkaParams));
 		DataStream<String> adsToCampaign = env
 				.readTextFile("/home/utente/eclipse-workspace/streamgen/yahoo-benchmark/input.txt");
 		;
