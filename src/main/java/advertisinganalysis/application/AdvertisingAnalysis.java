@@ -35,7 +35,7 @@ public class AdvertisingAnalysis {
 		DataStream<String> rawAdEvents = env.addSource(
 				new FlinkKafkaConsumer010<>("ad-events", new SimpleStringSchema(), MessageStream_kafkaParams));
 		DataStream<String> adsToCampaign = env
-				.readTextFile("/home/utente/eclipse-workspace/streamgen/yahoo-benchmark/input.txt");
+				.readTextFile("/home/ubuntu/empty-flink-java-project/input.txt");
 		;
 
 		DataStream<AdEvent> adEvents = rawAdEvents.map(new AdEventParser());
