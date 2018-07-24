@@ -9,11 +9,16 @@ import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.streaming.api.functions.co.RichCoFlatMapFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.util.Collector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> {
 
 	List<AdCampaign> adsToCampaigns;
+	
+	private static final Logger logger = LoggerFactory.getLogger(CampaignJoin.class);
 
 	@Override
 	public void open(Configuration conf) {
@@ -22,6 +27,7 @@ public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> 
 
 	@Override
 	public void flatMap1(String tuple, Collector<AdCampaign> out) throws Exception {
+		logger.info("New ad to campaign entry: " + tuple);
 		AdCampaign toAdd = new AdCampaign();
 
 		String[] fields = tuple.split(",");
@@ -36,7 +42,8 @@ public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> 
 	@Override
 	public void flatMap2(Ad tuple, Collector<AdCampaign> out) throws Exception {
 		AdCampaign output = null;
-
+		logger.info("New ad event: " + tuple);
+		
 		for (AdCampaign a : this.adsToCampaigns) {
 			if (a.getAdId().equals(tuple.getAdId())) {
 				output.setAdId(a.getAdId());
