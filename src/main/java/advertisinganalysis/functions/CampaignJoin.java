@@ -49,6 +49,7 @@ public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> 
 				output.setAdId(a.getAdId());
 				output.setCampaignId(a.getCampaignId());
 				output.setEventTime(tuple.getEventTime());
+				output.setTupleId(tuple.getTupleId());
 			}
 		}
 

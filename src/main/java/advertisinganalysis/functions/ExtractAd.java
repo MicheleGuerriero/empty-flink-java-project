@@ -24,6 +24,7 @@ public class ExtractAd extends RichMapFunction<AdEvent, Ad> {
 
 		toReturn.setAdId(tuple.getAdId());
 		toReturn.setEventTime(tuple.getEventTime());
+		toReturn.setTupleId(tuple.getTupleId());
 
 		return toReturn;
 	}

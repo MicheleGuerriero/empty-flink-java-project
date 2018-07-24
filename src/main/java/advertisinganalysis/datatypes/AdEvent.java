@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 
 public class AdEvent implements Serializable {
-
+	
 	private String userId;
 
 	private String adId;
