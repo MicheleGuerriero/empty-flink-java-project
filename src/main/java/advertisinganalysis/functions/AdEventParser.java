@@ -22,6 +22,7 @@ public class AdEventParser extends RichMapFunction<String, AdEvent> {
 
 	@Override
 	public AdEvent map(String tuple) throws Exception {
+		System.out.println("New ad event.");
 		JSONObject obj = new JSONObject(tuple);
 		return new AdEvent(obj.getString("user_id"), obj.getString("page_id"), obj.getString("ad_id"), obj.getString("ad_type"), obj.getString("event_type"), Long.parseLong(obj.getString("event_time")), obj.getString("ip_address"));
 	}
