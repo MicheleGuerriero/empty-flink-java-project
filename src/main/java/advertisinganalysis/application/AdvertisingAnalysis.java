@@ -40,7 +40,7 @@ public class AdvertisingAnalysis {
 
 		DataStream<AdEvent> adEvents = rawAdEvents.map(new AdEventParser());
 
-		DataStream<AdEvent> viewAdEvents = adEvents.filter((AdEvent tuple) -> tuple.getAdType().equals("view"));
+		DataStream<AdEvent> viewAdEvents = adEvents.filter((AdEvent tuple) -> tuple.getEventType().equals("view"));
 
 		DataStream<Ad> viewedAds = viewAdEvents.map(new ExtractAd());
 
