@@ -43,7 +43,7 @@ public class AdEventParser extends RichMapFunction<String, AdEvent> {
 		PrintStream socketWriter = new PrintStream(socket.getOutputStream());
 		socketWriter.println("t" + this.getRuntimeContext().getIndexOfThisSubtask() + counter + "_start");
 		JSONObject obj = new JSONObject(tuple);
-		AdEvent toReturn = new AdEvent(obj.getString("user_id"), obj.getString("page_id"), obj.getString("ad_id"), obj.getString("ad_type"), obj.getString("event_type"), Long.parseLong(obj.getString("event_time")), obj.getString("ip_address"));
+		AdEvent toReturn = new AdEvent(obj.getString("user_id"), obj.getString("ad_id"), obj.getString("page_id"), obj.getString("ad_type"), obj.getString("event_type"), Long.parseLong(obj.getString("event_time")), obj.getString("ip_address"));
 		toReturn.setTupleId("t" + this.getRuntimeContext().getIndexOfThisSubtask() + counter);
 		counter = counter + 1;
 		return toReturn;
