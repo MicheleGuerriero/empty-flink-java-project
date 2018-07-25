@@ -27,7 +27,7 @@ public class AdvertisingAnalysis {
 
 		// uncomment the below if you want to set the default parallelism for the
 		// project.
-		// env.setParallelism(1);
+		env.setParallelism(4);
 
 		Properties MessageStream_kafkaParams = new Properties();
 		MessageStream_kafkaParams.setProperty("bootstrap.servers", ":9092");
@@ -47,7 +47,7 @@ public class AdvertisingAnalysis {
 		DataStream<AdCampaign> adsPerChampaign = adsToCampaign.broadcast().connect(viewedAds)
 				.flatMap(new CampaignJoin());
 
-		DataStream<CampaignAnalysis> results = adsPerChampaign.keyBy("campaignId").timeWindow(Time.seconds(10), Time.milliseconds(1))
+		DataStream<CampaignAnalysis> results = adsPerChampaign.keyBy("campaignId").timeWindow(Time.seconds(10), Time.milliseconds(10))
 				.apply(new CampaignProcessor());
 
 		FlinkKafkaProducer010<String> ChampaignSink_producer = new FlinkKafkaProducer010<String>("localhost:9092",
