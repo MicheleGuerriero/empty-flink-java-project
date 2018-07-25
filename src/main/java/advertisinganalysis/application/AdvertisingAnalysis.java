@@ -47,7 +47,7 @@ public class AdvertisingAnalysis {
 		DataStream<AdCampaign> adsPerChampaign = adsToCampaign.broadcast().connect(viewedAds)
 				.flatMap(new CampaignJoin());
 
-		DataStream<CampaignAnalysis> results = adsPerChampaign.keyBy("campaignId").timeWindow(Time.seconds(10))
+		DataStream<CampaignAnalysis> results = adsPerChampaign.keyBy("campaignId").timeWindow(Time.seconds(10), Time.milliseconds(1))
 				.apply(new CampaignProcessor());
 
 		FlinkKafkaProducer010<String> ChampaignSink_producer = new FlinkKafkaProducer010<String>("localhost:9092",
