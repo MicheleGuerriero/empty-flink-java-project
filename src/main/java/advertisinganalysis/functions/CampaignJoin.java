@@ -46,6 +46,7 @@ public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> 
 		
 		for (AdCampaign a : this.adsToCampaigns) {
 			if (a.getAdId().equals(tuple.getAdId())) {
+				output = new AdCampaign();
 				output.setAdId(a.getAdId());
 				output.setCampaignId(a.getCampaignId());
 				output.setEventTime(tuple.getEventTime());
@@ -53,7 +54,8 @@ public class CampaignJoin extends RichCoFlatMapFunction<String, Ad, AdCampaign> 
 			}
 		}
 
-		out.collect(output);
+		if(output != null)
+			out.collect(output);
 	}
 
 }
