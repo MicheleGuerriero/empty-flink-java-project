@@ -53,10 +53,15 @@ public class CampaignProcessor extends RichWindowFunction<AdCampaign, CampaignAn
 		output.setEventTime(window.getEnd());
 
 		PrintStream socketWriter = new PrintStream(socket.getOutputStream());
+		
+		int max = -1;
 		for(AdCampaign t: windowContent) {
-			socketWriter.println(t.getTupleId() + "_end");	
+			if(Integer.parseInt(t.getTupleId().substring(1)) > max) {
+				max = Integer.parseInt(t.getTupleId().substring(1));
+			}
 		}
 
+		socketWriter.println("t" + max+ "_end");	
 		out.collect(output);
 	}
 
